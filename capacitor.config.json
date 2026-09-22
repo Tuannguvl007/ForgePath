@@ -1,0 +1,6 @@
+{
+  "appId": "com.forgepath.app",
+  "appName": "ForgePath",
+  "webDir": "dist",
+  "backgroundColor": "#0b0d10"
+}

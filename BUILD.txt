@@ -1,0 +1,11 @@
+ForgePath V4.0 — Web/PWA + Capacitor Foundation
+
+- V3.12 UI and workout logic retained as the baseline.
+- Added installable PWA manifest and app icons.
+- Added offline application shell/service worker.
+- Added Netlify build/publish configuration.
+- Added Capacitor 8 configuration for Android/iOS wrappers.
+- Added device-aware install experience for Chromium and iOS Safari.
+- New Exercise Guide uses technique text + YouTube Search; 3D viewer is disabled in the V4 runtime.
+- Home/Profile anatomical SVG remains intact.
+- User data still uses the existing local browser storage in this foundation release.
