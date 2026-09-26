@@ -1,47 +1,29 @@
 # ForgePath V4.0 Web
 
-Bản Web-only của ForgePath, chuyển từ V3.12 nhưng giữ ngôn ngữ giao diện/UX hiện tại.
+A clean web rebuild of ForgePath based on the ForgePath 2026 UI direction.
 
-## Đã thay đổi
+## What changed
 
-- Loại bỏ PWA/service worker/manifest/install prompt.
-- Loại bỏ Capacitor và toàn bộ native packaging.
-- Loại bỏ motion renderer, model runtime và các dependency liên quan.
-- Thay phần hướng dẫn chuyển động bằng **Exercise Guide + nút tìm tutorial trên YouTube**.
-- Giữ Anatomy SVG, workout logging, timer, RIR, progress, skills, onboarding và các màn hình hiện tại.
-- Tách CSS/JavaScript khỏi `index.html` để repo dễ quản lý hơn.
-- Web build không cần dependency ngoài.
+- Replaced the monolithic V3.12 `index.html` override stack with separate HTML/CSS/JS files.
+- Preserved the 41-exercise V3.12 library.
+- Added Today-first adaptive dashboard with readiness, quick adaptations, explainable "Why this workout?", muscle focus and weekly consistency.
+- Added real workout logging: previous values, targets, editable actual/RIR, set completion, add set, replace, skip, notes and rest timer.
+- Added YouTube Form Guide search instead of bundling a heavy 3D/WebGL runtime.
+- Added progress metrics, 8-week trend, coaching insight, muscle distribution and workout history.
+- Added searchable/filterable exercise library.
+- Uses IndexedDB for V4 state with localStorage fallback and migration support from `forgepath_state_v1`.
+- Pure web build: no PWA service worker and no Capacitor.
 
-## Chạy local
+## Run locally
 
-```bash
-npm run dev
-```
-
-Mở `http://localhost:8080`.
-
-## Build production
+Use any static server. For example:
 
 ```bash
-npm run build
+python -m http.server 8080
 ```
 
-Output: `dist/`.
+Then open `http://localhost:8080`.
 
-### Cloudflare Pages
+## Deploy
 
-- Build command: `npm run build`
-- Output directory: `dist`
-- Framework preset: `None`
-
-## Source layout
-
-```text
-src/
-├── core/       runtime + version bridge
-├── features/   progress, skills, anatomy, exercise guide
-├── ui/         UI layers preserved from V3.12
-└── styles/     shared application styles
-```
-
-V4.0 chủ yếu là bước **stabilization + web cleanup**. Các engine Recovery/Adaptive sẽ được tách sâu hơn ở các bản tiếp theo thay vì redesign presentation layer.
+The folder can be deployed as a static site to GitHub Pages, Cloudflare Pages, Vercel, Netlify or any normal web host. No build step is required.
