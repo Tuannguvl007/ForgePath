@@ -38,25 +38,17 @@ jobs:
           yes | sdkmanager --licenses >/dev/null || true
           sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
-      - name: Prepare bundled ForgePath runtime
-        run: |
-          rm -rf android/app/src/main/assets/www
-          mkdir -p android/app/src/main/assets
-          tar -xzf .apk-build/v5804-runtime.tar.gz -C android/app/src/main/assets
-          test -f android/app/src/main/assets/www/index.html
-          test -f android/app/src/main/assets/www/js/planner.js
-
       - name: Build debug APK
         working-directory: android
         run: gradle --no-daemon :app:assembleDebug
 
       - name: Rename APK
-        run: cp android/app/build/outputs/apk/debug/app-debug.apk ForgePath-V5.8-Beta-5804-offline-debug.apk
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk ForgePath-V5.8-Beta-5804-debug.apk
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ForgePath-V5.8-Beta-5804-Offline-APK
-          path: ForgePath-V5.8-Beta-5804-offline-debug.apk
+          name: ForgePath-V5.8-Beta-5804-APK
+          path: ForgePath-V5.8-Beta-5804-debug.apk
           if-no-files-found: error
           retention-days: 7
