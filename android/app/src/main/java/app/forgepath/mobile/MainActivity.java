@@ -8,16 +8,13 @@ import android.os.Bundle;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import androidx.webkit.WebViewAssetLoader;
-
 public class MainActivity extends Activity {
-    private static final String APP_HOST = "appassets.androidplatform.net";
-    private static final String APP_URL = "https://appassets.androidplatform.net/assets/www/index.html";
+    private static final String APP_URL = "https://forgepath.nguyenvantuan301207.workers.dev";
+    private static final String APP_HOST = "forgepath.nguyenvantuan301207.workers.dev";
     private static final int FILE_CHOOSER_REQUEST = 5808;
 
     private WebView webView;
@@ -28,11 +25,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         getWindow().setStatusBarColor(Color.rgb(7,11,16));
         getWindow().setNavigationBarColor(Color.rgb(7,11,16));
-
-        final WebViewAssetLoader assetLoader = new WebViewAssetLoader.Builder()
-                .setDomain(APP_HOST)
-                .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this))
-                .build();
 
         webView = new WebView(this);
         webView.setBackgroundColor(Color.rgb(7,11,16));
@@ -45,8 +37,6 @@ public class MainActivity extends Activity {
         s.setMediaPlaybackRequiresUserGesture(false);
         s.setSupportZoom(false);
         s.setBuiltInZoomControls(false);
-        s.setAllowFileAccess(false);
-        s.setAllowContentAccess(true);
 
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -69,12 +59,6 @@ public class MainActivity extends Activity {
         });
 
         webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-                WebResourceResponse response = assetLoader.shouldInterceptRequest(request.getUrl());
-                return response != null ? response : super.shouldInterceptRequest(view, request);
-            }
-
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 Uri uri = request.getUrl();
